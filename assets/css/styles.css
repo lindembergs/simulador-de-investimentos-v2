@@ -31,16 +31,17 @@ body {
   margin-top: 52px;
   margin-left: 115px;
 }
-.investiment-type-box {
+.investment-type-box {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 30px;
-  margin-top: 182px;
-  border-bottom: #b3b0b0 solid 3px;
+  margin-top: 202px;
+  border-bottom: #e7e3e3 solid 3px;
   position: relative;
+  margin-inline: 6%;
 }
-.investiment-type-box::after {
+.investment-type-box::after {
   margin-left: 270px;
   content: "";
   position: absolute;
@@ -53,18 +54,34 @@ body {
   border-radius: 6px;
 }
 
-.investiment-type-box ul {
+.investment-type-box ul {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 188px;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
   position: relative;
 }
-.investiment-type-box ul li {
+.investment-type-box ul li {
   font-size: 20px;
   font-weight: 700;
   line-height: 30px;
   text-align: center;
   color: #7d7d7d;
+}
+.investment-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-inline: 6%;
+}
+.investment-box {
+  margin-top: 80.5px;
+}
+.investment-box p {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+  text-align: left;
 }
