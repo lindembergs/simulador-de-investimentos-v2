@@ -35,4 +35,36 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 30px;
+  margin-top: 182px;
+  border-bottom: #b3b0b0 solid 3px;
+  position: relative;
+}
+.investiment-type-box::after {
+  margin-left: 270px;
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 12;
+  width: 212px;
+  height: 6px;
+  background: linear-gradient(to bottom, #0038ff 100%, #5a7fff 100%);
+  pointer-events: none;
+  border-radius: 6px;
+}
+
+.investiment-type-box ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 188px;
+  margin-bottom: 30px;
+  position: relative;
+}
+.investiment-type-box ul li {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+  text-align: center;
+  color: #7d7d7d;
 }
