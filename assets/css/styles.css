@@ -85,6 +85,7 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 .investment-box {
   width: 35%;
