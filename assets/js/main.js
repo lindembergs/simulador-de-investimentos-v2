@@ -1,22 +1,25 @@
-// início do perrengue do gráfico
-
 document.addEventListener("DOMContentLoaded", () => {
   const ctx = document.getElementById("myChart").getContext("2d");
 
-  const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-  gradient.addColorStop(0, "#0038FF");
-  gradient.addColorStop(1, "#5A7FFF");
+  const gradientPoupanca = ctx.createLinearGradient(0, 0, 0, 300);
+  gradientPoupanca.addColorStop(0, "#0038FF");
+  gradientPoupanca.addColorStop(1, "#5A7FFF");
 
-  const myChart = new Chart(ctx, {
+  const gradientLCI_LCA = ctx.createLinearGradient(0, 0, 0, 300);
+  gradientLCI_LCA.addColorStop(0, "#0038FF");
+  gradientLCI_LCA.addColorStop(1, "#5A7FFF");
+
+  new Chart(ctx, {
     type: "bar",
     data: {
-      labels: ["Yellow", "Orange"],
+      labels: ["Poupança", "LCI e LCA"],
       datasets: [
         {
-          data: [12, 10],
-          backgroundColor: gradient,
+          data: [80, 80],
+          backgroundColor: [gradientPoupanca, gradientLCI_LCA],
           borderWidth: 0,
           barPercentage: 0.5,
+          barThickness: 64, // Largura da barra
         },
       ],
     },
@@ -31,23 +34,10 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       plugins: {
         legend: { display: false },
-        tooltip: { callbacks: { title: () => "" } },
-        afterDraw: (chart) => {
-          const ctx = chart.ctx;
-          chart.data.datasets.forEach((dataset, datasetIndex) => {
-            const meta = chart.getDatasetMeta(datasetIndex);
-            if (!meta.hidden) {
-              meta.data.forEach((element, index) => {
-                const model = element._model;
-                const value = index === 0 ? "R$69.996,00" : "R$104.037,43";
-                ctx.fillStyle = "#000";
-                ctx.font = "12px Arial";
-                ctx.textAlign = "center";
-                ctx.textBaseline = "bottom";
-                ctx.fillText(value, model.x, model.y - 10);
-              });
-            }
-          });
+        tooltip: {
+          callbacks: {
+            title: () => "", // Remover título padrão do tooltip
+          },
         },
       },
       elements: {
@@ -60,7 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
           },
         },
       },
+      layout: {
+        padding: {
+          top: 50, // Ajuste conforme necessário
+        },
+      },
     },
   });
 });
-// fim do inimigo
