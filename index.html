@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="assets/css/styles.css" />
-    <script src="assets/js/main.js"></script>
     <title>Simulador de investimentos</title>
   </head>
   <body>
@@ -13,30 +12,56 @@
         <img src="assets/img/dev-invest-logo.svg" alt="logo da dev invest" />
       </figure>
     </header>
-    <main>
-      <div class="investment-type-box">
-        <ul>
-          <li>CDB E LC</li>
-          <li>LCI E LCA</li>
-        </ul>
-      </div>
-      <div class="investment-container">
-        <div class="investment-box">
-          <p>Para começar, qual valor você gostaria de investir?</p>
-          <div class="value-and-btn">
-            <div><span>R$ 5.000,00</span></div>
-            <div class="btn">
-              <button><img src="assets/icons/btn_subtrai.svg" alt="" /></button>
-              <button><img src="assets/icons/btn_soma.svg" alt="" /></button>
+    <div class="container">
+      <main>
+        <div class="investment-type-box">
+          <ul>
+            <li>CDB E LC</li>
+            <li>LCI E LCA</li>
+          </ul>
+        </div>
+        <div class="investment-container">
+          <div class="investment-box">
+            <p>Para começar, qual valor você gostaria de investir?</p>
+            <div class="value-and-btn">
+              <div><span>R$ 5.000,00</span></div>
+              <div class="btn">
+                <button>
+                  <img src="assets/icons/btn_subtrai.svg" alt="" />
+                </button>
+                <button><img src="assets/icons/btn_soma.svg" alt="" /></button>
+              </div>
+            </div>
+            <p class="time">Quanto tempo deixaria seu dinheiro investido?</p>
+            <span class="months">1 mês</span>
+
+            <input
+              type="range"
+              min="1"
+              max="360"
+              value="1"
+              class="months-slider"
+            />
+            <div class="info">
+              <img src="assets/icons/info.svg" alt="" />
             </div>
           </div>
-          <p class="time">Quanto tempo deixaria deu dinheiro investido?</p>
-          <span class="months">24 Meses</span>
-          <div class="medidor">
-            <canvas id="meuGrafico"></canvas>
+          <div class="metric-box">
+            <div class="rendimento">
+              <p>Em <strong>120 meses</strong> você teria:</p>
+              <span> R$ 316.565,47</span>
+              <p class="gross-value">Valor total bruto</p>
+            </div>
+            <div class="middle-content">
+              <p>Total investido: <span>R$ 140.000,00</span></p>
+              <p>Rendimento bruto: <strong> R$ 176.565,47</strong></p>
+              <p>Na poupança: <span>R$ 140.000,00</span></p>
+            </div>
           </div>
-          
-      </div>
-    </main>
+        </div>
+      </main>
+    </div>
+    <script defer src="assets/js/main.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </body>
 </html>
