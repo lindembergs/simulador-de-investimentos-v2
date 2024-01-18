@@ -1,3 +1,56 @@
+const investmentSpan = document.querySelector("#investment-value");
+const incrementButton = document.querySelector("#btn-sum");
+const subtractButton = document.querySelector("#btn-subtract");
+
+function incrementInvestmentValue() {
+  const investmentValue = parseInt(
+    investmentSpan.textContent
+      .replace("R$ ", "")
+      .replace(".", "")
+      .replace(",", "")
+  );
+  let newValue = investmentValue + 50;
+  investmentSpan.textContent = `R$ ${newValue.toLocaleString("pt-BR")}`;
+}
+function descrementInvestmentValue() {
+  const investmentValue = parseInt(
+    investmentSpan.textContent
+      .replace("R$ ", "")
+      .replace(".", "")
+      .replace(",", "")
+  );
+  let newValue = investmentValue - 50;
+  if (newValue <= 0) {
+    newValue = 0;
+    investmentSpan.textContent = `R$ ${newValue.toLocaleString("pt-BR")}`;
+  } else {
+    investmentSpan.textContent = `R$ ${newValue.toLocaleString("pt-BR")}`;
+  }
+}
+incrementButton.addEventListener("click", incrementInvestmentValue);
+subtractButton.addEventListener("click", descrementInvestmentValue);
+
+function progressMonth() {
+  let investmentTime = document.querySelector(".months");
+  let rangeValue = document.querySelector(".months-slider").value;
+
+  // if (rangeValue === "1") {
+  //   investmentTime.innerHTML = `R$ ${rangeValue} mês`;
+  // } else {
+  //   investmentTime.innerHTML = `R$ ${rangeValue} meses`;
+  // }
+  rangeValue <= 1
+    ? (investmentTime.innerHTML = `${rangeValue} mês`)
+    : (investmentTime.innerHTML = `${rangeValue} meses`);
+}
+
+document
+  .querySelector(".months-slider")
+  .addEventListener("input", progressMonth);
+
+// grafico
+// grafico
+// grafico
 document.addEventListener("DOMContentLoaded", () => {
   const ctx = document.getElementById("myChart").getContext("2d");
 
