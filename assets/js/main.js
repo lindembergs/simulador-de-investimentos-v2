@@ -1,7 +1,6 @@
 const investmentSpan = document.querySelector("#investment-value");
 const incrementButton = document.querySelector("#btn-sum");
 const subtractButton = document.querySelector("#btn-subtract");
-
 function incrementInvestmentValue() {
   const investmentValue = parseInt(
     investmentSpan.textContent
@@ -11,6 +10,7 @@ function incrementInvestmentValue() {
   );
   let newValue = investmentValue + 50;
   investmentSpan.textContent = `R$ ${newValue.toLocaleString("pt-BR")}`;
+  calculaLciLca();
 }
 function descrementInvestmentValue() {
   const investmentValue = parseInt(
@@ -26,6 +26,7 @@ function descrementInvestmentValue() {
   } else {
     investmentSpan.textContent = `R$ ${newValue.toLocaleString("pt-BR")}`;
   }
+  calculaLciLca();
 }
 incrementButton.addEventListener("click", incrementInvestmentValue);
 subtractButton.addEventListener("click", descrementInvestmentValue);
@@ -33,20 +34,37 @@ subtractButton.addEventListener("click", descrementInvestmentValue);
 function progressMonth() {
   let investmentTime = document.querySelector(".months");
   let rangeValue = document.querySelector(".months-slider").value;
+  const rendimentoStrong = document.querySelector(".rendimento strong");
 
-  // if (rangeValue === "1") {
-  //   investmentTime.innerHTML = `R$ ${rangeValue} mês`;
-  // } else {
-  //   investmentTime.innerHTML = `R$ ${rangeValue} meses`;
-  // }
   rangeValue <= 1
     ? (investmentTime.innerHTML = `${rangeValue} mês`)
     : (investmentTime.innerHTML = `${rangeValue} meses`);
+  rangeValue <= 1
+    ? // aproveitamento da função do primeiro container pro segundo
+      (rendimentoStrong.innerHTML = `${rangeValue} mês`)
+    : (rendimentoStrong.innerHTML = `${rangeValue} meses`);
+  rendimentoStrong.innerHTML;
 }
-
 document
   .querySelector(".months-slider")
   .addEventListener("input", progressMonth);
+
+function calculaLciLca() {
+  const investmentValue = parseInt(
+    investmentSpan.textContent
+      .replace("R$ ", "")
+      .replace(".", "")
+      .replace(",", "")
+  );
+  let newValue = investmentValue;
+  let rendimentoSapan = document.querySelector(".rendimento span");
+
+  rendimentoSapan.textContent = `R$ ${newValue.toLocaleString("pt-BR")}`;
+
+  let aporteInicial = newValue;
+  console.log(aporteInicial);
+}
+// início da seção de att dos valores das métricas //
 
 // grafico
 // grafico
