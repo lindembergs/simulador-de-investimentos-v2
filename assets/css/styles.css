@@ -116,9 +116,7 @@ input {
 
 .amount-invested {
   display: flex;
-
   margin-bottom: 0.4rem;
-
   align-items: center;
   gap: 1.5rem;
 }
