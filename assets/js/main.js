@@ -1,131 +1,276 @@
-const investmentSpan = document.querySelector("#investment-value");
-const incrementButton = document.querySelector("#btn-sum");
-const subtractButton = document.querySelector("#btn-subtract");
-function incrementInvestmentValue() {
-  const investmentValue = parseInt(
-    investmentSpan.textContent
-      .replace("R$ ", "")
-      .replace(".", "")
-      .replace(",", "")
-  );
-  let newValue = investmentValue + 50;
-  investmentSpan.textContent = `R$ ${newValue.toLocaleString("pt-BR")}`;
-  calculaLciLca();
-}
-function descrementInvestmentValue() {
-  const investmentValue = parseInt(
-    investmentSpan.textContent
-      .replace("R$ ", "")
-      .replace(".", "")
-      .replace(",", "")
-  );
-  let newValue = investmentValue - 50;
-  if (newValue <= 0) {
-    newValue = 0;
-    investmentSpan.textContent = `R$ ${newValue.toLocaleString("pt-BR")}`;
-  } else {
-    investmentSpan.textContent = `R$ ${newValue.toLocaleString("pt-BR")}`;
+const moneyInput = document.getElementById('moneyInput'); 
+const moneyInputFake = document.getElementById('moneyInput-fake');
+const rangeInput = document.getElementById('rangeInput');
+const monthsInvested = document.querySelector('.time-invested span')
+const monthValue = document.querySelector('.month-value');
+const monthLabel = document.querySelectorAll('.month-label');
+const amountInvestment = document.querySelector('.result-invested');
+const totalsInvested = document.querySelector('.totals-invested')
+const totalsGrossIncome = document.querySelector('.totals-gross-income')
+const savingsInvested = document.querySelector('.totals-savings')
+const ctx = document.getElementById('myChart');
+const cdi = 0.1303;
+const selic = 0.1175;
+
+let newChartInvestment;
+
+let moneyInputvalue = document.getElementById('moneyInput');
+let investmentType = 'CDB';
+
+let valueInvested = {
+  CDB: {
+    title: 'CDB e LC',
+    value: '50,00',
+    month: 10,
+    total: 0,
+    percentage: 1.27,
+    amount: 55.44,
+    investedTotal: 0.56,
+    grossIncome: 56.80,
+    savings: 50.26
+  },
+  LCI: {
+    title: 'LCI e LCA',
+    value: '80,50',
+    month: 20,
+    total: 0,
+    percentage: 0.98,
+    amount: 51,
+    investedAmount: 0.56,
+    grossIncome: 56.80,
+    savings: 81.50
   }
-  calculaLciLca();
+};
+
+let initialValue = valueInvested[investmentType];
+
+moneyInput.value = initialValue.value
+rangeInput.value = initialValue.month
+monthsInvested.innerHTML = initialValue.month
+
+// Mácara do input
+moneyInput.addEventListener('input', function(event) {
+  // Remove caracteres não numéricos
+  const value = event.target.value.replace(/\D/g, '');
+  
+  // Formata o valor como moeda
+  const formattedValue = new Intl.NumberFormat('pt-BR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(value / 100);
+
+  // Atualiza o valor no campo de entrada
+  event.target.value = formattedValue;
+
+  // Atualiza o campo no span
+  moneyInputFake.innerText = formattedValue
+});
+
+// Investment Input
+moneyInputvalue.addEventListener('input', (e) => {
+  valueInvested[investmentType].value = e.target.value
+  handleCalcInvestment();
+})
+
+// Range Input
+rangeInput.addEventListener('input', (e) => {
+  monthsInvested.innerHTML = e.target.value
+  monthValue.innerHTML = e.target.value
+
+  monthLabel.forEach(month => {
+    if(e.target.value == 1) {
+      month.innerHTML = 'mês'
+    } else {
+      month.innerHTML = 'meses'
+    }
+  })
+    
+  valueInvested[investmentType].month = e.target.value;
+  handleCalcInvestment();  
+})
+
+// Mudança de Tabs
+function changeTab(type) {
+  const tab = document.querySelectorAll('.tab li');
+  
+  tab.forEach(tab => tab.classList.remove('active-tab'))
+  
+  document.getElementById(`tab-${type}`).classList.add('active-tab')
+  investmentType = type
+  initialValue = valueInvested[investmentType];
+  
+  moneyInput.value = initialValue.value
+  rangeInput.value = initialValue.month
+  monthsInvested.innerHTML = initialValue.month
+  monthValue.innerHTML = initialValue.month
+
+  changeLabelInvestment(type);
+  handleCalcInvestment()
 }
-incrementButton.addEventListener("click", incrementInvestmentValue);
-subtractButton.addEventListener("click", descrementInvestmentValue);
 
-function progressMonth() {
-  let investmentTime = document.querySelector(".months");
-  let rangeValue = document.querySelector(".months-slider").value;
-  const rendimentoStrong = document.querySelector(".rendimento strong");
+// Alteração da legenda.
+function changeLabelInvestment(type) {
+  let investmentType = document.querySelector('.percentInvestmentType')
 
-  rangeValue <= 1
-    ? (investmentTime.innerHTML = `${rangeValue} mês`)
-    : (investmentTime.innerHTML = `${rangeValue} meses`);
-  rangeValue <= 1
-    ? // aproveitamento da função do primeiro container pro segundo
-      (rendimentoStrong.innerHTML = `${rangeValue} mês`)
-    : (rendimentoStrong.innerHTML = `${rangeValue} meses`);
-  rendimentoStrong.innerHTML;
+  type == 'CDB' 
+    ? investmentType.innerHTML = 'CDB e LC: 127% do CDI.'
+    : investmentType.innerHTML = 'LCI e LCA: 98% do CDI.'
 }
-document
-  .querySelector(".months-slider")
-  .addEventListener("input", progressMonth);
 
-function calculaLciLca() {
-  const investmentValue = parseInt(
-    investmentSpan.textContent
-      .replace("R$ ", "")
-      .replace(".", "")
-      .replace(",", "")
-  );
-  let newValue = investmentValue;
-  let rendimentoSapan = document.querySelector(".rendimento span");
+// Handle Add
+function hanldeControllersInput(param) {
+  let amount = document.getElementById('moneyInput').value
+  let valorNumber = parseFloat(amount.replace(/\./g, "").replace(",", "."));
 
-  rendimentoSapan.textContent = `R$ ${newValue.toLocaleString("pt-BR")}`;
+  param == 'sum'
+    ? numberResult = valorNumber + 50
+    : numberResult = valorNumber - 50
 
-  let aporteInicial = newValue;
-  console.log(aporteInicial);
+  let numberResultFormated = parseFloat(numberResult.toFixed(2))
+  
+  if (numberResultFormated < 0 || numberResultFormated == 0) {
+    numberResultFormated = 0
+    moneyInput.value = 0
+  }
+
+  const formattedValue = new Intl.NumberFormat('pt-BR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(numberResultFormated);
+
+  valueInvested[investmentType].value = formattedValue
+  moneyInput.value = formattedValue
+  handleCalcInvestment()
 }
-// início da seção de att dos valores das métricas //
 
-// grafico
-// grafico
-// grafico
-document.addEventListener("DOMContentLoaded", () => {
-  const ctx = document.getElementById("myChart").getContext("2d");
+// m = cap*(1+i)^temp
 
-  const gradientPoupanca = ctx.createLinearGradient(0, 0, 0, 300);
-  gradientPoupanca.addColorStop(0, "#0038FF");
-  gradientPoupanca.addColorStop(1, "#5A7FFF");
+// Calculo do investimento
+async function handleCalcInvestment() {
+  let finalValue = 0;
+  let grossIncome = 0;
+  let i = valueInvested[investmentType].percentage*cdi;
 
-  const gradientLCI_LCA = ctx.createLinearGradient(0, 0, 0, 300);
-  gradientLCI_LCA.addColorStop(0, "#0038FF");
-  gradientLCI_LCA.addColorStop(1, "#5A7FFF");
+  let cap = parseFloat(valueInvested[investmentType].value.replace(/\./g, "").replace(",", "."))
+  const ir = await handleIRTaxCalc();
 
-  new Chart(ctx, {
-    type: "bar",
+  finalValue = cap * Math.pow((1 + i), (valueInvested[investmentType].month/12));
+
+  investmentType == 'CDB'
+    ? grossIncome = (cap + ((finalValue - cap)*ir))
+    : grossIncome = finalValue
+
+  valueInvested[investmentType].amount = Math.round(grossIncome*100)/100
+  valueInvested[investmentType].grossIncome = Math.round(finalValue*100)/100
+  
+  handleCalcSavings()
+}
+
+// Aplicações de até 180 dias: 22,5%; 
+// Aplicações entre 181 e 360 dias: 20%; 
+// Aplicações entre 361 e 720 dias: 17,5%; 
+// Aplicações maiores do que 720 dias: 15%. 
+
+// Calculo da Taxa de IR
+async function handleIRTaxCalc() {
+  let n = valueInvested[investmentType].month * 30;
+  let tx;
+
+  switch(true) {
+    case n <= 180:
+      return tx = (1 - 0.225);
+    case n >= 181 && n <= 360:
+      return tx = (1- 0.2);
+    case n >= 361 && n <= 720:
+      return tx = (1- 0.175);
+    case n > 721:
+      return tx = (1 - 0.15)
+  }
+
+  return tx
+}
+
+// Calculo da poupança
+function handleCalcSavings() {
+  let finalValue = 0;
+  let tx = 0;
+
+  if(cdi >= 0.085) {
+    tx = 0.005
+  } else {
+    tx = 0.7 * selic
+  }
+  
+  let cap = parseFloat(valueInvested[investmentType].value.replace(/\./g, "").replace(",", "."))
+  finalValue = cap * Math.pow((1 + tx), (valueInvested[investmentType].month/12));
+  
+  // Arredonda o valor para duas casa decimanis depois da virgula e injeta no obejto como um Number;
+  valueInvested[investmentType].savings = Math.round(finalValue*100)/100
+  
+  handleShowInvestedTotals();
+}
+
+// Mostra totos os totais em tela
+function handleShowInvestedTotals() {
+  amountInvestment.innerHTML = formmaterCurrencyValue(valueInvested[investmentType].amount)
+  totalsInvested.innerHTML = formmaterCurrencyValue(valueInvested[investmentType].value)
+  totalsGrossIncome.innerHTML = formmaterCurrencyValue(valueInvested[investmentType].grossIncome)
+  savingsInvested.innerHTML = formmaterCurrencyValue(valueInvested[investmentType].savings)
+
+  hanldeUpdateChart();
+}
+
+function formmaterCurrencyValue(param) {
+  return `${param.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`
+}
+
+handleCalcInvestment()
+
+function hanldeUpdateChart() {
+  newChartInvestment && newChartInvestment.destroy();
+
+  newChartInvestment = new Chart(ctx, {
+    type: 'bar',
     data: {
-      labels: ["Poupança", "LCI e LCA"],
-      datasets: [
-        {
-          data: [80, 80],
-          backgroundColor: [gradientPoupanca, gradientLCI_LCA],
-          borderWidth: 0,
-          barPercentage: 0.5,
-          barThickness: 64, // Largura da barra
-        },
-      ],
+      labels: ['Poupança', valueInvested[investmentType].title],
+      margin: '30px',
+      datasets: [{
+        borderColor: '#0038FF',
+        backgroundColor: '#5A7FFF',
+        data: [valueInvested[investmentType].savings, valueInvested[investmentType].amount],
+        borderWidth: 1,
+        borderRadius: 5,
+      }]
     },
     options: {
       scales: {
         y: {
-          display: false,
           beginAtZero: true,
-          grid: { display: false, drawBorder: false },
+          display: false,
+          grid: {
+            display: false
+          },
+          ticks: {
+            display: false
+          }
         },
-        x: { grid: { display: false, drawBorder: false } },
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            display: true
+          }
+        }
       },
       plugins: {
-        legend: { display: false },
+        legend: false,
         tooltip: {
           callbacks: {
-            title: () => "", // Remover título padrão do tooltip
-          },
-        },
-      },
-      elements: {
-        bar: {
-          borderRadius: {
-            topRight: 8,
-            topLeft: 8,
-            bottomRight: 0,
-            bottomLeft: 0,
-          },
-        },
-      },
-      layout: {
-        padding: {
-          top: 50, // Ajuste conforme necessário
-        },
-      },
-    },
-  });
-});
+            label: label => `R$ ${formmaterCurrencyValue(label.formattedValue)}`
+          }
+        }
+      }
+    }
+  })
+}
