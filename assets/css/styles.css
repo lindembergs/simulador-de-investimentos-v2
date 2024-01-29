@@ -1,224 +1,375 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;900&display=swap");
 * {
-  padding: 0;
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
-a {
-  text-decoration: none;
-  color: unset;
-}
-ul {
-  list-style: none;
-}
-button {
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-}
-body {
-  width: 100%;
-  height: 100%;
+
+html {
+  font-size: 10px;
   font-family: "Poppins", sans-serif;
 }
-.container {
-  padding-inline: 10%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+
+  cursor: pointer;
 }
-main {
+
+input {
+  border: none;
+
   width: 100%;
+
+  color: #000;
+  font-size: 4.2rem;
+  font-weight: 700;
 }
+
+#container {
+  display: flex;
+  flex-direction: column;
+}
+
 .header {
-  display: flex;
-  align-items: center;
+  padding: 5.2rem 11.5rem;
 }
 
-.header figure {
-  width: 120px;
-  height: 18.5px;
-  margin-top: 52px;
-  margin-left: 10%;
-}
-.investment-type-box {
+#principal {
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  height: 30px;
-  margin-top: 202px;
-  border-bottom: #e7e3e3 solid 3px;
-  position: relative;
+  flex-direction: column;
+
   width: 100%;
-}
-.investment-type-box::after {
-  margin-left: 270px;
-  content: "";
-  position: absolute;
-  bottom: -5px;
-  left: 12;
-  width: 200px;
-  height: 6px;
-  background: linear-gradient(to bottom, #0038ff 100%, #5a7fff 100%);
-  pointer-events: none;
-  border-radius: 6px;
+  max-width: 105rem;
+  margin: 0 auto;
+
+  padding: 0rem 2rem;
 }
 
-.investment-type-box ul {
+.tab {
   display: flex;
-  flex-direction: row;
-  align-items: center;
   justify-content: center;
-  gap: 20%;
-  margin-bottom: 50px;
+  width: 100%;
+  gap: 6.8rem;
+
+  margin-bottom: 1.85rem;
+
+  border-bottom: 1px solid #eee;
+}
+
+.tab li {
+  display: flex;
+  justify-content: center;
+
+  width: 21.2rem;
+  padding-bottom: 3.15rem;
   position: relative;
-  width: 100%;
-}
-.investment-type-box ul li {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 30px;
-  text-align: center;
+
   color: #7d7d7d;
+  list-style: none;
+  font-size: 2rem;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: opacity 0.24s;
 }
-.investment-container {
+
+.tab li:hover {
+  opacity: 0.7;
+}
+
+.content {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-.investment-box {
-  width: 35%;
-  display: flex;
-  flex-direction: column;
-}
-.investment-box p:first-child {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.25rem;
-  text-align: left;
-  width: 318px;
-  margin-bottom: 20px;
-}
-.investment-box .time {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.25rem;
-  text-align: left;
-  margin-bottom: 20px;
-}
-.value-and-btn {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 56px;
-}
-.value-and-btn span {
-  width: 262px;
-  height: 63px;
-  margin-top: 362px;
-  font-size: 2.625rem;
-  font-weight: 700;
-  line-height: 63px;
-  text-align: left;
-}
+  gap: 2rem;
 
-.btn button img {
-  width: 42px;
-  height: 42px;
-  margin-left: 10px;
-}
-
-.months {
-  font-size: 42px;
-  font-weight: 700;
-  line-height: 63px;
-  text-align: left;
-  width: 300px;
-}
-
-.medidor {
   width: 100%;
-  display: flex;
-  margin-top: 8px;
+
+  padding: 1rem 0px;
 }
 
-.info {
-  margin-top: 56px;
-}
-
-.metric-box {
-  width: 440px;
-  height: 523px;
-  border-radius: 16px;
-  background-color: #f5f5f5;
-  margin-top: 28.5px;
-  padding-block: 30px;
-  padding-inline: 15px;
-}
-
-.investment-box input {
-  margin-top: 30px;
-}
-
-.rendimento {
-  width: 255px;
-  height: 92px;
-}
-.rendimento p {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 30px;
-  font-weight: 300;
-  line-height: 30px;
-  text-align: left;
-}
-.rendimento span {
-  font-size: 36px;
-  font-weight: 700;
-  line-height: 54px;
-  text-align: left;
-  color: #0038ff;
-}
-.rendimento .gross-value {
-  font-size: 10px;
-  font-weight: 300;
-  line-height: 15px;
-  text-align: left;
-}
-
-.middle-content {
-  width: auto;
-  height: 55px;
+.left-side {
   display: flex;
   flex-direction: column;
-  margin-top: 48px;
+  width: 100%;
+  max-width: 49.1rem;
+
+  max-width: 49rem;
+
+  padding: 1rem 0;
 }
 
-.middle-content p {
-  font-size: 10px;
+.left-side h3 {
+  width: 100%;
+  color: #000;
+
+  font-size: 2rem;
+  font-weight: 700;
+
+  margin-top: 4.2rem;
+}
+
+.amount-inveted-title {
+  width: 100%;
+  max-width: 31.8rem;
+}
+
+.amount-invested {
+  display: flex;
+
+  margin-bottom: 0.4rem;
+
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.amount-invested span {
+  color: #000;
+  font-size: 4.2rem;
+  font-weight: 700;
+}
+
+.input-amount {
+  width: 100%;
+  height: 4.8rem;
+}
+
+#moneyInput-fake {
+  display: flex;
+  max-width: 31rem;
+  width: 100%;
+
+  letter-spacing: 0.15rem;
+  color: #fff;
+}
+
+.button-controllers {
+  display: flex;
+
+  gap: 2.4rem;
+}
+
+.button-controllers button {
+  transition: all 0.24s;
+}
+
+.button-controllers button:hover {
+  opacity: 0.6;
+}
+
+.time-invested {
+  display: flex;
+  gap: 1rem;
+
+  text-transform: capitalize;
+}
+
+.time-invested span {
+  color: #000;
+
+  font-size: 4.2rem;
+  font-weight: 700;
+
+  margin-bottom: 0.8rem;
+}
+
+input[type="range"] {
+  width: 100%;
+  margin: 1rem 0px 5.6rem 0px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px 2px #fff;
+  background: #fff;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background-color: #d9d9d9;
+  border-radius: 0rem;
+  height: 0.3rem;
+  cursor: pointer;
+}
+
+/* slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  margin-top: -7px;
+  border-radius: 0.5rem;
+  height: 1rem;
+  width: 1rem;
+}
+
+.info-box {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 0.8rem;
+}
+
+.info-percentage {
+  display: flex;
+  flex-direction: column;
+}
+
+.percentInvestmentType {
+  font-size: 1rem;
+}
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 440px;
+
+  padding: 3.2rem;
+  border-radius: 1.6rem;
+  background: #f5f5f5;
+}
+
+.right-side-title {
+  display: flex;
+  align-items: center;
+
+  flex-wrap: wrap;
+  gap: 0.8rem;
+
+  color: #000;
+
+  font-size: 2rem;
   font-weight: 300;
-  line-height: 15px;
-  text-align: left;
 }
 
-.middle-content span {
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 15px;
-  text-align: left;
+.result-invested {
+  color: #0038ff;
+  font-size: 3.6rem;
+  font-weight: 700;
+
+  overflow: auto;
 }
 
-.middle-content strong {
+.result-invested-legend {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.totals {
+  display: flex;
+  flex-direction: column;
+
+  margin: 4.8rem 0px 6.98rem 0px;
   font-size: 10px;
+}
+
+.totals span {
+  font-weight: 300;
+}
+
+.totals strong {
   font-weight: 500;
-  line-height: 15px;
-  text-align: left;
+}
+
+.totals span:nth-child(2) strong {
   color: #0038ff;
 }
 
-.metrics {
-  margin-top: 80px;
-  margin-left: 22px;
+@media (max-width: 980px) {
+  .header {
+    padding: 3.5rem;
+  }
+
+  .header figure {
+    margin: 0 auto;
+    width: fit-content;
+  }
+
+  .content {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 570px) {
+  .amount-inveted-title {
+    margin-top: 1rem !important;
+  }
+
+  .left-side h3 {
+    font-size: 1.5rem;
+  }
+
+  .left-side span {
+    font-size: 3rem;
+  }
+
+  .amount-invested {
+    font-size: 3rem;
+  }
+
+  .amount-invested span {
+    max-width: 30vw;
+  }
+
+  #moneyInput {
+    font-size: 3rem;
+  }
+
+  #moneyInput-fake {
+    max-width: 35vw;
+  }
+
+  .input-amount {
+    height: 34px;
+  }
+
+  .button-controllers button img {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .button-controllers {
+    gap: 1.3rem;
+  }
+
+  .result-invested {
+    font-size: 3rem;
+  }
+
+  .right-side-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 430px) {
+  #moneyInput {
+    font-size: 2.5rem;
+  }
+
+  .amount-invested {
+    gap: 0.8rem;
+  }
+
+  .amount-invested span {
+    font-size: 2.5rem;
+  }
+
+  .time-invested {
+    gap: 0.8rem;
+  }
+
+  .time-invested span {
+    font-size: 2.5rem;
+  }
+
+  .result-invested {
+    font-size: 2.5rem;
+  }
+}
+
+.active-tab {
+  border-bottom: 3px solid #0038ff;
 }
