@@ -21,7 +21,7 @@ let valueInvested = {
   CDB: {
     title: "CDB e LC",
     value: "50,00",
-    month: 1,
+    month: 10,
     total: 0,
     percentage: 1.27,
     amount: 55.44,
@@ -32,7 +32,7 @@ let valueInvested = {
   LCI: {
     title: "LCI e LCA",
     value: "80,50",
-    month: 1,
+    month: 2,
     total: 0,
     percentage: 0.98,
     amount: 51,
