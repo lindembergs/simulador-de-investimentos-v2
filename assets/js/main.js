@@ -72,20 +72,20 @@ moneyInputvalue.addEventListener("input", (e) => {
   handleCalcInvestment();
 });
 
+function updateMonthText(month) {
+  monthsInvested.innerHTML = month;
+  monthValue.innerHTML = month;
+
+  monthLabel.forEach((label) => {
+    label.innerHTML = month === "1" ? "mês" : "meses";
+  });
+}
 // Range Input
 rangeInput.addEventListener("input", (e) => {
-  monthsInvested.innerHTML = e.target.value;
-  monthValue.innerHTML = e.target.value;
+  const selectedMonth = e.target.value;
+  updateMonthText(selectedMonth);
 
-  monthLabel.forEach((month) => {
-    if (e.target.value == 1) {
-      month.innerHTML = "mês";
-    } else {
-      month.innerHTML = "meses";
-    }
-  });
-
-  valueInvested[investmentType].month = e.target.value;
+  valueInvested[investmentType].month = selectedMonth;
   handleCalcInvestment();
 });
 
@@ -105,6 +105,7 @@ function changeTab(type) {
   monthValue.innerHTML = initialValue.month;
 
   changeLabelInvestment(type);
+  updateMonthText(initialValue.month);
   handleCalcInvestment();
 }
 
