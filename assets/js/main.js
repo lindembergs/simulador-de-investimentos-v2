@@ -32,7 +32,7 @@ let valueInvested = {
   LCI: {
     title: "LCI e LCA",
     value: "80,50",
-    month: 2,
+    month: 10,
     total: 0,
     percentage: 0.98,
     amount: 51,
